@@ -1,8 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  // =========================
-  // DATA (SOURCE OF TRUTH)
-  // =========================
-
+  // job information in array
   let jobs = [
     {
       id: 1,
@@ -87,10 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   ];
 
-  // =========================
-  // DOM ELEMENTS
-  // =========================
-
+  // ELEMENTS catch
   const jobList = document.getElementById("job-list");
   const totalCount = document.getElementById("total-count");
   const interviewCount = document.getElementById("interview-count");
@@ -104,13 +98,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
   let currentTab = "all";
   function setActiveTab(tabName) {
-    // সব tab reset
     [tabAll, tabInterview, tabRejected].forEach((tab) => {
       tab.classList.remove("bg-blue-600", "text-white");
       tab.classList.add("bg-gray-100", "text-gray-600");
     });
 
-    // Active tab blue করো
+    // Active tab blue code
     if (tabName === "all") {
       tabAll.classList.add("bg-blue-600", "text-white");
       tabAll.classList.remove("bg-gray-100", "text-gray-600");
@@ -123,27 +116,20 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  // =========================
   // RENDER FUNCTION
-  // =========================
-
   function renderJobs() {
     jobList.innerHTML = "";
 
-    let filteredJobs;
+    const filteredJobs =
+      currentTab === "all"
+        ? jobs
+        : jobs.filter((job) => job.status === currentTab);
 
-    if (currentTab === "all") {
-      filteredJobs = jobs;
-    } else {
-      filteredJobs = jobs.filter((job) => job.status === currentTab);
-    }
+    filteredJobs.length === 0
+      ? noJobs.classList.remove("hidden")
+      : noJobs.classList.add("hidden");
 
-    if (filteredJobs.length === 0) {
-      noJobs.classList.remove("hidden");
-    } else {
-      noJobs.classList.add("hidden");
-    }
-
+    // card
     filteredJobs.forEach((job) => {
       const card = document.createElement("div");
       card.className =
@@ -201,9 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
     setActiveTab(currentTab);
   }
 
-  // =========================
   // COUNT UPDATE
-  // =========================
 
   function updateCounts() {
     totalCount.textContent = jobs.length;
@@ -221,9 +205,7 @@ document.addEventListener("DOMContentLoaded", function () {
       jobsCountText.textContent = rejected + " of " + jobs.length + " jobs";
   }
 
-  // =========================
   // EVENT DELEGATION
-  // =========================
 
   jobList.addEventListener("click", function (e) {
     const id = Number(e.target.closest("button")?.dataset.id);
