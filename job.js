@@ -167,12 +167,12 @@ document.addEventListener("DOMContentLoaded", function () {
         </p>
 
         <div class="flex gap-3 mt-4">
-          <button class="interview-btn px-4 py-1 text-sm border-2 border-green-400 rounded"
+          <button class="interview-btn px-4 py-1 text-sm border-2 border-green-400 rounded  hover:bg-green-300"
             data-id="${job.id}">
             Interview
           </button>
 
-          <button class="rejected-btn px-4 py-1 text-sm border-2 border-red-400 rounded"
+          <button class="rejected-btn px-4 py-1 text-sm border-2 border-red-400 rounded    hover:bg-red-300 "
             data-id="${job.id}">
             Rejected
           </button>
