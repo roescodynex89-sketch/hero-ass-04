@@ -229,9 +229,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // =========================
-  // TAB EVENTS
-  // =========================
+  // TAB
 
   tabAll.addEventListener("click", function () {
     currentTab = "all";
@@ -248,6 +246,5 @@ document.addEventListener("DOMContentLoaded", function () {
     renderJobs();
   });
 
-  // INITIAL RENDER
   renderJobs();
 });
